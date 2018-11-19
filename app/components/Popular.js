@@ -1,4 +1,36 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+class SelectLanguage extends Component {
+  static propTypes = {
+    selectedLanguage: PropTypes.string.isRequired,
+    onSelect: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    selectedLanguage: 'All'
+  };
+
+  render() {
+    const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
+
+    return (
+      <ul className='languages'>
+        {languages.map((lang) => (
+          <li 
+            key={lang}
+            onClick={this.props.onSelect.bind(null, lang)}
+            style={
+              lang === this.props.selectedLanguage ? {color: '#d0021b'} : null
+            }
+          >
+            {lang}
+          </li>
+          ))}
+      </ul>
+    );
+  }
+}
 
 export default class Popular extends Component {
   state = {
@@ -12,22 +44,44 @@ export default class Popular extends Component {
   };
 
   render() {
-    const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
-
     return (
-      <ul className='languages'>
-        {languages.map((lang, i) => (
-          <li 
-            key={lang}
-            onClick={this.updateLanguage.bind(null, lang)}
-            style={
-              lang === this.state.selectedLanguage ? {color: '#d0021b'} : null
-            }
-          >
-            {lang}
-          </li>
-          ))}
-      </ul>
+      <div>
+        <SelectLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage}
+        />
+      </div>
     );
   }
 }
+
+
+// SelectLanguage can be rewritten like this, to make a stateless functional component
+// const SelectLanguage = (props) => {
+//   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
+
+//   return (
+//     <ul className='languages'>
+//       {languages.map((lang) => (
+//         <li 
+//           key={lang}
+//           onClick={props.onSelect.bind(null, lang)}
+//           style={
+//             lang === props.selectedLanguage ? {color: '#d0021b'} : null
+//           }
+//         >
+//           {lang}
+//         </li>
+//         ))}
+//     </ul>
+//   );
+// }
+
+// SelectLanguage.propTypes = {
+//   selectedLanguage: PropTypes.string.isRequired,
+//   onSelect: PropTypes.func.isRequired
+// };
+
+// SelectLanguage.defaultProps = {
+//   selectedLanguage: 'All'
+// };
