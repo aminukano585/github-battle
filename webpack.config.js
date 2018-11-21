@@ -14,6 +14,7 @@ module.exports = {
     ],
   },
   mode: 'development',
+  devtool: 'cheap-module-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.html',
