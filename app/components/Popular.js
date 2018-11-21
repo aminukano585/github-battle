@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as api from '../utils/api';
 
 class SelectLanguage extends Component {
   static propTypes = {
@@ -8,7 +9,8 @@ class SelectLanguage extends Component {
   };
 
   static defaultProps = {
-    selectedLanguage: 'All'
+    selectedLanguage: 'All',
+    repos: null
   };
 
   render() {
@@ -34,8 +36,14 @@ class SelectLanguage extends Component {
 
 export default class Popular extends Component {
   state = {
-    selectedLanguage: 'All'
+    selectedLanguage: 'All',
+    repos: null
   };
+
+  componentDidMount() {
+    api.fetchPopularRepos(this.state.SelectLanguage)
+      .then(repos => console.log(repos));
+  }
 
   updateLanguage = (lang) => {
     this.setState({
