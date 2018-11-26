@@ -6,12 +6,16 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader' },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] }
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   mode: 'development',
   devtool: 'cheap-module-source-map',
