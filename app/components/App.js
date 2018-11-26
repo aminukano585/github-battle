@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavBar from './NavBar';
 import Home from './Home';
 import Battle from './Battle';
@@ -12,9 +12,12 @@ export default class App extends Component {
         <div className='container'>
           <NavBar />
 
-          <Route exact path='/' component={Home} />
-          <Route path='/battle' component={Battle} />
-          <Route path='/popular' component={Popular} />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/battle' component={Battle} />
+            <Route exact path='/popular' component={Popular} />
+            <Route render={() => <p>Not Found</p>} />
+          </Switch>
         </div>
       </Router>
     );
