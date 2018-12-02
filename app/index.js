@@ -4,6 +4,6 @@ import App from './components/App';
 import './index.css';
 
 ReactDOM.render(
-  <App routine={['eat', 'code', 'sleep']} />,
+  <App />,
   document.getElementById('root')
 );
